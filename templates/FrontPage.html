@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+{%  load static %}
+<HTML>
+<HEAD>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title> ImageCaptionGeneration </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/17c067ba5f.js" crossorigin="anonymous"></script>
+</HEAD>
+<BODY style="background-image: url('{% static 'image/back3.jpg' %}');">
+    <section class="header">
+        <nav>
+            <!-- <a href=""> <img src="{% static 'image/logo.png' %}" /></a> -->
+            <div class="nav-links" id="navLinks" style="text-align: center;">
+                <i class="fas fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="{% url 'frontpage' %}" > About </a></li>
+                    <li><a href="{% url 'prediction' %}"> Prediction </a></li>
+                    <li><a href="{% url 'feedback' %}"> FeedBack </a></li>
+                    <li><a href="{% url 'signup' %}"> SignUp </a></li>
+                    <li><a href="{% url 'login' %}"> Login </a></li>
+                </ul>
+
+            </div>
+            <i class="fas fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <div class="TextBox" style="margin-top: 140px;">
+            <h1 style="margin-bottom: 30px;"> Image Caption Generation System</h1>
+             <p>Welcome, Generate the caption about any Image and feel free to visit again</p>
+            <a href="{% url 'prediction' %}" class="master-btn"> Visit Me for Image Caption Generation</a>
+        </div>
+
+        
+
+    </section>
+    <!-- javascript for toggle and menu-->
+    <script>
+        var navLinks=document.getElementById("navLinks");
+        function showMenu(){
+            navLinks.style.right="0";
+        }
+        function hideMenu(){
+            navLinks.style.right="-200px";
+        }
+    </script>
+</BODY>
+</HTML>

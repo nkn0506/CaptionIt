@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="with=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>Prediction</title>
+      <link rel="stylesheet" href="{% static 'css/style_prediction.css' %}">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+      <script src="https://kit.fontawesome.com/17c067ba5f.js" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+          <style>
+            #display-image{
+            width: 320px;
+            height: 200px;
+            border: 5px solid black;
+            background-position: center;
+            background-size: cover;
+            margin-left:-20px;
+            }
+          </style>
+   </head>
+   <body>
+      <div class="center">
+         <div class="container">
+            <a class="close-btn fas fa-times" title="close" href="{% url 'frontpage' %}"></a>
+            <div class="text">
+               Image Caption Generation
+            </div>
+            <form action="{% url 'prediction' %}" method="post" enctype="multipart/form-data">
+               {% csrf_token %}
+               <div class="data1" style="margin-top: 30px">
+                  <label style="color:#0b03fc;font-weight: bold;font-size: 18px;height: 40px;width: 60%;">Image Chooser: <input type="file" id="image-input" name="uploadedImage" accept="image/jpeg, image/png, image/jpg"></label>
+               </div>
+               <div class="data">
+                  <label>Image Link:<button style="margin-left:5px;" onclick="showLinkImage()" id="btn">Show Image</button></label>
+                  <input id="link" style="margin-top: 10px" name='locationInput' type="text" placeholder="Enter link like https://www.images.com/temp.jpg">
+               </div>
+               <div id="wrapper" style="margin-left: 490px;margin-top: -160px">
+                  <label style="font-size:20px;font-weight: bold;margin-left:-20px;color:#1A237E">Uploaded Image:</label><br>
+                  <div id="display-image" name="imageContent"></div>
+              </div>
+               <div class="btn" style="margin-top:-60px">
+                  <div class="inner"></div>
+                  <button type="submit" onsubmit="">Caption</button>
+               </div>
+               <div class="result" style="margin-top: 4px;font-weight: bold;">
+                  <label style="color:#B71C1C;font-size:20px;">Caption:</label>
+                  <label style="word-wrap: break-word;font-size:13px;color:black;background-color: #aefcc3;width: 100%;display: inline-block;border-width:1px; border-style:solid; border-color:black; padding: 1em;">{{result}}</label>
+               </div>
+            </form>
+         </div>
+      </div>
+      <script type="text/javascript">
+        function showLinkImage() {
+         event.preventDefault()
+            var val = document.getElementById('link').value,
+                src = val
+                img = document.createElement('img');
+            img.src = src;
+	    img.setAttribute("height", "200");
+            img.setAttribute("width", "320");
+	    document.getElementById("display-image").appendChild(img);
+        }
+    </script>
+   </body>
+      <script>
+           const image_input = document.querySelector("#image-input");
+           image_input.addEventListener("change", function() {
+           let imageLoacation=document.getElementById("image-input").value;
+           const reader = new FileReader();
+           console.log("reder",reader.result)
+           reader.addEventListener("load", () => {
+           const uploaded_image = reader.result;
+           document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+           });
+           reader.readAsDataURL(this.files[0]);
+           });
+      </script>
+
+</html>

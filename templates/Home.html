@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+        background-color: red;
+        }
+        label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}
+    </style>
+</head>
+<body>
+<h1>this is the template folder</h1>
+<img src="{% static 'image/dog.jpg' %}" alt="Django">
+<img src="{% get_static_prefix %}image/dog.jpg" alt="Django">
+<div class="block">
+    <label>Simple label</label>
+    <input type="text" />
+</div>
+<div class="block">
+    <label>Label with more text</label>
+    <input type="text" />
+</div>
+<div class="block">
+    <label>Short</label>
+    <input type="text" />
+</div>
+</body>
+</html>
